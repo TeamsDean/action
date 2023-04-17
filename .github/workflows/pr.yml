@@ -13,7 +13,6 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const github = context.github;
             const { owner, repo, number } = context.issue;
             github.issues.createComment({
               owner: owner,
