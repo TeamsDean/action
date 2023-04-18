@@ -1,24 +1,28 @@
 name: test
 
 on:
-  pull_request_target:
-    types:
-      - opened
-      - reopened
-      - synchronize
+  pull_request:
+    types: [opened]
 
 jobs:
   comment:
     permissions: write-all
     runs-on: ubuntu-latest
     steps:
-      - name: Create comment
-        uses: peter-evans/create-or-update-comment@v3
+      - name: Read Markdown file
+        id: markdown
+        run: |
+          echo "| bench-result | pull-elapsed(s) | create-elapsed(s) | run-elapsed(s) | total-elapsed(s) |" > result.md
+          echo "::set-output name=content::$(cat result.md)"
+      - name: Add comment to Pull Request
+        uses: actions/github-script@v4
         with:
-          issue-number: ${{ github.event.pull_request.number }}
-          body: |
-            This is a multi-line test comment
-            - With GitHub **Markdown** :sparkles:
-            - Created by [create-or-update-comment][1]
-
-            [1]: https://github.com/peter-evans/create-or-update-comment
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const markdown = '${{ steps.markdown.outputs.content }}';
+            github.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+              body: markdown
+            })
