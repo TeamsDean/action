@@ -1,5 +1,8 @@
 name: test
 
+permissions:
+  pull-requests: write
+
 on:
   pull_request:
     types: [opened]
@@ -25,3 +28,8 @@ jobs:
               issue_number: context.payload.pull_request.number,
               body: markdown
             })
+      - name: test
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          message: |
+            Release ${{ github.sha }} to <https://pr-${{ github.event.number }}.example.com>
