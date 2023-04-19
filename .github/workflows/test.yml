@@ -4,6 +4,9 @@ jobs:
   welcome:
     runs-on: ubuntu-latest
     steps:
+      - name: test
+        run: |
+          echo "##hello##" >> test.md
       - uses: actions/github-script@v6
         with:
           script: |
@@ -11,7 +14,5 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `**Welcome**, new contributor!
-
-                Please make sure you've read our [contributing guide](CONTRIBUTING.md) and we look forward to reviewing your Pull request shortly ✨`
+              body: `test.md`
             })
