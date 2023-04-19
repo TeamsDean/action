@@ -7,7 +7,7 @@ jobs:
       - name: test
         id: result
         run: |
-          echo "##hello##" >> test.md
+          echo "## hello" >> test.md
           cat test.md
       - uses: actions/github-script@v6
         with:
