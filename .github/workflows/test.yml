@@ -7,8 +7,8 @@ jobs:
       - name: test
         id: result
         run: |
-          echo "##hello##" >> test.md
-          cat test.md
+          echo "| benchmark-result | pull-elapsed(s) | create-elapsed(s) | run-elapsed(s) | total-elapsed(s) |" > test.md
+          echo "|:-------|:-----------------:|:-------------------:|:----------------:|:------------------:|" >> test.md
       - uses: actions/github-script@v6
         with:
           script: |
