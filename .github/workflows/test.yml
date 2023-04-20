@@ -13,7 +13,7 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            const markdownFilePath = './result.md';
+            const markdownFilePath = 'test.md';
             const markdownContent = fs.readFileSync(markdownFilePath, 'utf8');
 
             const { data: comments } = await github.rest.issues.listComments({
