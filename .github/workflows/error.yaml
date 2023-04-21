@@ -13,4 +13,4 @@ jobs:
           ref: "main"
       - name: Test application
         run: |
-          echo "::error title={benchmark-result}::warning"
+          echo "::error title={benchmark-result}::warning" && exit 1
