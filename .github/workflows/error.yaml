@@ -1,0 +1,17 @@
+name: Error Test
+
+on: pull_request
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: "main"
+      - name: Test application
+        run: |
+          echo "Error PR"
+          exit 1 # exit with error status code
