@@ -8,9 +8,9 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: "main"
       - name: Test application
         run: |
-          echo "::error title={benchmark-result}::warning"
+          echo "::error title={benchmark-result}::warning" && exit 1
